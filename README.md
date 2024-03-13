@@ -1,2 +1,2 @@
-# pokemon-starter-choice-helper
-Project developed for my article about building a tool for helping choosing a start of a Pokémon game.
+# Pokémon starter choice helper
+This project was developed for my series of articles [Python beginners' guide: a simple data collector for helping on decision making](https://medium.com/@hiviniciusbs/python-beginners-guide-a-simple-data-collector-for-helping-on-decision-making-part-i-9df463c475cc).
