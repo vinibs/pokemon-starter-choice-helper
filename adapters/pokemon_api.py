@@ -25,3 +25,12 @@ def get_types(pokemon_name: str) -> Tuple[str]:
         return tuple(type_data['type']['name'] for type_data in types_data)
     
     return _handle_request(url, extract_types)
+
+def get_species_from_generation(generation_number: int) -> Tuple[str]:
+    url = f'{_base_url}/generation/{generation_number}'
+
+    def extract_species(json_data: Any) -> Tuple[str]:
+        species_data = json_data.get('pokemon_species')
+        return tuple(specie_data['name'] for specie_data in species_data)
+    
+    return _handle_request(url, extract_species)
