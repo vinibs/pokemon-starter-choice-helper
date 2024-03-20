@@ -13,7 +13,7 @@ def get_types(pokemon_name: str) -> Tuple[str]:
     
     try:
         data = response.json()
-        types_data = data.get("types")
+        types_data = data.get('types')
         return tuple(type_data['type']['name'] for type_data in types_data)
     
     except Exception:
