@@ -18,8 +18,11 @@ def _handle_request(url: str, extract_data: callable) -> Any:
     except Exception:
         return ()
 
-def get_types(pokemon_name: str) -> Tuple[str]:
-    url = f'{_base_url}/pokemon/{pokemon_name}'
+def get_types(pokemon_number: int = None, pokemon_name: str = None) -> Tuple[str]:
+    if not (pokemon_number or pokemon_name):
+        return tuple()
+
+    url = f'{_base_url}/pokemon/{pokemon_number or pokemon_name}'
 
     def extract_types(json_data: Any) -> Tuple[str]:
         types_data = json_data.get('types')
