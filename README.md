@@ -6,3 +6,4 @@ You can directly access any of the already available parts of the series through
 
 - [Part I](https://medium.com/@hiviniciusbs/python-beginners-guide-a-simple-data-collector-for-helping-on-decision-making-part-i-9df463c475cc)
 - [Part II](https://medium.com/@hiviniciusbs/python-beginners-guide-a-simple-data-collector-for-helping-on-decision-making-part-ii-c894fb684d7e)
+- [Part III](https://medium.com/@hiviniciusbs/python-beginners-guide-a-simple-data-collector-for-helping-on-decision-making-part-iii-e2b2628d30e0)
