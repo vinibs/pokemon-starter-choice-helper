@@ -405,3 +405,19 @@ def _calculate_types_immunity(defender_types: Tuple[str], attacker_types: Tuple[
         immunity_condition = AdvantageCondition.IMMUNE if full_immunity else AdvantageCondition.PARTIALLY_IMMUNE
 
     return immunity_condition
+
+
+def calculate_species_types_advantage(referece_species_types: Tuple[str], compared_species_types: Tuple[str]) -> AdvantageCondition:
+    offensive_damage_points = _calculate_types_damage_points(referece_species_types, compared_species_types)
+    defensive_damage_points = _calculate_types_damage_points(compared_species_types, referece_species_types)
+    immunity_condition = _calculate_types_immunity(referece_species_types, compared_species_types)
+
+    if immunity_condition is not None:
+        return immunity_condition
+    
+    damage_points = offensive_damage_points - defensive_damage_points
+
+    if damage_points == 0:
+        return AdvantageCondition.NEUTRAL
+    
+    return AdvantageCondition.ADVANTAGE if damage_points > 0 else AdvantageCondition.DISADVANTAGE
