@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Tuple
+from typing import Any, Dict, Tuple
 
 
 class Types(Enum):
@@ -25,6 +25,12 @@ class Types(Enum):
     @staticmethod
     def list():
         return list(map(lambda t: t.value, Types))
+    
+class AdvantageCondition(Enum):
+    ADVANTAGE = 'advantage'
+    DISADVANTAGE = 'disadvantage'
+    PARTIALLY_IMMUNE = 'partially_immune'
+    IMMUNE = 'immune'
 
 _types_damage_multiplier_relation = {
     Types.NORMAL.value: {
@@ -405,3 +411,27 @@ def _calculate_types_damage_points(attacker_types: Tuple[str], defender_types: T
             damage_points = damage_points * types_damage
 
     return damage_points
+
+
+def _calculate_types_immunity(defender_types: Tuple[str], attacker_types: Tuple[str]) -> AdvantageCondition:
+    damage_multipliers = []
+
+    for attack_type in attacker_types:
+        if attack_type not in Types.list():
+            raise Exception('invalid_attacker_type', attack_type)
+
+        for defense_type in defender_types:
+            if defense_type not in Types.list():
+                raise Exception('invalid_defense_type', defense_type)
+            
+            types_damage = _types_damage_multiplier_relation[attack_type][defense_type]
+            damage_multipliers.append(types_damage)
+
+    if 0 not in damage_multipliers:
+        immunity_condition = None
+
+    else:
+        full_immunity = set(damage_multipliers) == {0} 
+        immunity_condition = AdvantageCondition.IMMUNE if full_immunity else AdvantageCondition.PARTIALLY_IMMUNE
+
+    return immunity_condition
