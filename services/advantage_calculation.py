@@ -388,3 +388,20 @@ _types_damage_multiplier_relation = {
         Types.FAIRY.value: 1,
     },
 }
+
+
+def _calculate_types_damage_points(attacker_types: Tuple[str], defender_types: Tuple[str]) -> int:
+    damage_points = 1
+
+    for attack_type in attacker_types:
+        if attack_type not in Types.list():
+            raise Exception('invalid_attacker_type', attack_type)
+
+        for defense_type in defender_types:
+            if defense_type not in Types.list():
+                raise Exception('invalid_defense_type', defense_type)
+            
+            types_damage = _types_damage_multiplier_relation[attack_type][defense_type]
+            damage_points = damage_points * types_damage
+
+    return damage_points
