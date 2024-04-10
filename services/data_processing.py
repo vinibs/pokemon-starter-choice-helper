@@ -39,3 +39,12 @@ def get_typed_starters_list(generation_number: int) -> Dict[str, Tuple[str]]:
     return {
         starter_name: pokemon_api.get_types(pokemon_name=starter_name) for starter_name in starters_names_list
     }
+
+def process_starters_advantages(generation_number: int) -> Dict[str, Dict[str, int]]:
+    starters = get_typed_starters_list(generation_number)
+    generation_pokemon_list = get_typed_pokemon_list(generation_number)
+
+    return {
+        starter_name: get_pokemon_advantage_relations((starter_name, starter_types), generation_pokemon_list)
+        for starter_name, starter_types in starters.items()
+    }
