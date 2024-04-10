@@ -1,4 +1,4 @@
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, List, Tuple
 from http import HTTPStatus
 import re
 import requests
@@ -48,3 +48,16 @@ def get_species_from_generation(generation_number: int) -> Dict[int, str]:
         return dict(sorted(data.items()))
     
     return _handle_request(url, extract_species)
+
+def get_starters_names_from_generation(generation_number: int) -> Dict[int, List[str]]:
+    starters_names_relation = {
+        1: ['venusaur', 'charizard', 'blastoise'],
+        2: ['meganium', 'typhlosion', 'feraligatr'],
+        3: ['sceptile', 'blaziken', 'swampert'],
+        4: ['torterra', 'infernape', 'empoleon'],
+        5: ['serperior', 'emboar', 'samurott'],
+        6: ['chesnaught', 'delphox', 'greninja'],
+        7: ['decidueye', 'incineroar', 'primarina'],
+    }
+
+    return starters_names_relation.get(generation_number)
