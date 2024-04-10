@@ -29,3 +29,13 @@ def get_pokemon_advantage_relations(
         advantage_relation[condition].append((listed_pokemon_name, listed_pokemon_types))
     
     return advantage_relation
+
+def get_typed_starters_list(generation_number: int) -> Dict[str, Tuple[str]]:
+    starters_names_list = pokemon_api.get_starters_names_from_generation(generation_number)
+
+    if not starters_names_list:
+        return {}
+    
+    return {
+        starter_name: pokemon_api.get_types(pokemon_name=starter_name) for starter_name in starters_names_list
+    }
